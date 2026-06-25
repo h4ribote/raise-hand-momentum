@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Teams Raise Hand Momentum
 // @namespace    https://github.com/h4ribote/hand-momentum
-// @version      1.0.0
+// @version      1.0.1
 // @description  Teams 会議で他の参加者が挙手したら自動的に自分も挙手するスクリプト
 // @author       h4ribote
 // @match        https://teams.live.com/*
@@ -142,8 +142,8 @@
 
     if (othersRaised >= threshold && !myHandUp) {
       raiseMyHand(btn, `他${othersRaised}人が挙手（しきい値${threshold}）`);
-    } else if (CONFIG.autoLower && myHandUp && autoRaisedByScript) {
-      lowerMyHand(btn, '他の全員が手を下げた');
+    } else if (othersRaised < threshold && CONFIG.autoLower && myHandUp && autoRaisedByScript) {
+      lowerMyHand(btn, `挙手者${othersRaised} < しきい値${threshold}`);
     }
 
     updateStatus({ rosterOpen: true, others: othersRaised, mine: myHandUp });
