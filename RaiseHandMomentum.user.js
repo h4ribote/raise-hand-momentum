@@ -48,8 +48,8 @@
     pollMs: 1500,              // 監視間隔(ms)
     requireOthers: 1,          // 他の何人が挙手したら自分も挙げるか（初期値。画面の +/- で変更可）
     cooldownMs: 3000,          // 操作後のクールダウン(ms)。連打/誤検知防止
-    autoLower: false,          // true: 監視中に他の全員が手を下げたら、自分が自動で挙げた手も下げる
-    lowerOnDisable: false,     // true: 参加者一覧を閉じた(OFF)とき、自動で挙げた手を下げる
+    autoLower: true,          // 挙手数が閾値を下回ったら、自分が自動で挙げた手も下げる
+    lowerOnDisable: false,     // 参加者一覧を閉じた(OFF)とき、自動で挙げた手を下げる
     showStatus: true,          // 左下に小さなステータス/操作パネルを出すか
   };
   const STORAGE_KEY = 'autoRaiseThreshold';
@@ -142,7 +142,7 @@
 
     if (othersRaised >= threshold && !myHandUp) {
       raiseMyHand(btn, `他${othersRaised}人が挙手（しきい値${threshold}）`);
-    } else if (CONFIG.autoLower && othersRaised === 0 && myHandUp && autoRaisedByScript) {
+    } else if (CONFIG.autoLower && myHandUp && autoRaisedByScript) {
       lowerMyHand(btn, '他の全員が手を下げた');
     }
 
