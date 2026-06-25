@@ -1,0 +1,2 @@
+# Hand momentum
+Teamsの会議で他ユーザーの挙手を検知して挙手を実行するTampermonkey用のスクリプト
